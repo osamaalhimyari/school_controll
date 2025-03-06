@@ -1,0 +1,34 @@
+import 'package:school_controll/core/constants/app_api_links.dart';
+
+import '/app/data/model/school_model.dart';
+import '../../../core/api/api_response.dart';
+import '../../../core/api/api_trans.dart';
+
+class InitStepsPageData {
+  static Future<ApiResponse<Map<String, dynamic>>> insertSchoolData(
+      SchoolModel data) async {
+    return await ApiTrans.post(AppApiLinks.schools, data.toMap());
+  }
+
+  static Future<ApiResponse<Map<String, dynamic>>> getSchoolData() async {
+    return await ApiTrans.get(AppApiLinks.schools, {});
+  }
+
+  static Future<ApiResponse<Map<String, dynamic>>> insertBranchData(
+      Map<String, dynamic> data) async {
+    return await ApiTrans.post(AppApiLinks.branches, data);
+  }
+
+  static Future<ApiResponse<Map<String, dynamic>>> getBranchData() async {
+    return await ApiTrans.get(AppApiLinks.branches, {});
+  }
+
+  static Future<ApiResponse<Map<String, dynamic>>> insertTeacherData(
+      Map<String, dynamic> data) async {
+    return await ApiTrans.post(AppApiLinks.teachers, data);
+  }
+
+  static Future<ApiResponse<Map<String, dynamic>>> getTeacherData() async {
+    return await ApiTrans.get(AppApiLinks.teachers, {});
+  }
+}

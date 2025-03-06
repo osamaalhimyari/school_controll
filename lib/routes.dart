@@ -1,0 +1,18 @@
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:school_controll/core/middlewares/init_page_middleware.dart';
+import 'app/views/screens/init_steps_page.dart';
+import '/core/modules/mainScreen/main_screen.dart';
+import '/core/constants/app_routes_names.dart';
+
+List<GetPage<dynamic>>? routesPages = [
+  // GetPage(
+  //   name: AppRoutes.splash,
+  //   page: () => SplashScreen(),
+  //   // binding: MyBinding(), // ✅ Bind splash dependencies
+  // ),
+  GetPage(name: AppRoutes.start, page: () => const MainScreen()),
+  GetPage(
+      name: AppRoutes.initStepsPage,
+      page: () => const InitStepsPage(),
+      middlewares: [InitPageMiddleware()]),
+];
