@@ -1,13 +1,11 @@
 import 'package:school_controll/core/constants/app_api_links.dart';
-
-import '/app/data/model/school_model.dart';
 import '../../../core/api/api_response.dart';
 import '../../../core/api/api_trans.dart';
 
 class InitStepsPageData {
   static Future<ApiResponse<Map<String, dynamic>>> insertSchoolData(
-      SchoolModel data) async {
-    return await ApiTrans.post(AppApiLinks.schools, data.toMap());
+      Map<String, dynamic> data) async {
+    return await ApiTrans.post(AppApiLinks.schools, data);
   }
 
   static Future<ApiResponse<Map<String, dynamic>>> getSchoolData() async {

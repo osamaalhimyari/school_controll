@@ -11,6 +11,8 @@ class AppApiLinks {
   //
   static const String schools = "schools";
   static const String branches = "branches";
+  static const String subjects = "subjects";
+  static const String grades = "grades";
 
   static const String teachers = "teachers";
 }

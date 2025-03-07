@@ -83,7 +83,7 @@ class LightTheme {
 
       // Card Theme
       cardTheme: CardTheme(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 237, 235, 235),
         elevation: 2,
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         shape: RoundedRectangleBorder(

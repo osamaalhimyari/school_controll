@@ -16,6 +16,9 @@ class AppRoutes {
   static const String splash = "/splash";
   static const String initStepsPage = "/initStepsPage";
   static const String homePage = "/homePage";
+  static const String configPage = "/configPage";
+  static const String subjectsPage = "/subjectsPage";
+  static const String gradesPage = "/gradesPage";
 
   //
 }

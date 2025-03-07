@@ -8,42 +8,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomePageController controller = Get.put(HomePageController());
+    Get.put(HomePageController());
     return Center(
       child: Column(
         children: [
-          ElevatedButton(
-              onPressed: () {
-//
-                controller.indertData();
-              },
-              child: Text("insert Data")),
-          SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-              onPressed: () {
-//
-                controller.fetchData();
-              },
-              child: Text("show Data")),
-          SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-              onPressed: () {
-//
-                controller.deleteData();
-              },
-              child: Text("delete Data")),
-          SizedBox(
-            height: 10,
-          ),
-          GetBuilder<HomePageController>(builder: (context) {
-            return controller.school == null
-                ? Text("no Data")
-                : Text("${controller.school!.toMap()}");
-          })
+          //
         ],
       ),
     );

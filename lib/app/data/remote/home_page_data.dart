@@ -9,8 +9,4 @@ class HomePageData {
   static Future<ApiResponse<Map<String, dynamic>>> getData() async {
     return await ApiTrans.get("schools", {});
   }
-
-  // deleteData() async {
-  //   return await ApiTrans.deleteData();
-  // }
 }

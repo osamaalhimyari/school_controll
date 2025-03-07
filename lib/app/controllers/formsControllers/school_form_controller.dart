@@ -72,7 +72,7 @@ class SchoolFormController extends GetxController {
       status: schoolStatus.value,
     );
 
-    var response = await InitStepsPageData.insertSchoolData(schoolData);
+    var response = await InitStepsPageData.insertSchoolData(schoolData.toMap());
     if (handlingTransaction(response)) {
       status.value = true;
       Get.snackbar('Success', 'School added successfully!',

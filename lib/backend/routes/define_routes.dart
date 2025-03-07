@@ -1,3 +1,5 @@
+import 'package:school_controll/backend/controllers/database_grade_controller.dart';
+import 'package:school_controll/backend/controllers/database_subject_controller.dart';
 import 'package:school_controll/backend/controllers/database_teacher_controller.dart';
 
 import '/backend/controllers/database_branch_controller.dart';
@@ -14,4 +16,10 @@ void defineRoutes() {
   //
   RoutesManager.post("teachers", DatabaseTeacherController.store);
   RoutesManager.get("teachers", DatabaseTeacherController.show);
+  //
+  RoutesManager.post("subjects", DatabaseSubjectController.store);
+  RoutesManager.get("subjects", DatabaseSubjectController.index);
+  //
+  RoutesManager.post("grades", DatabaseGradeController.store);
+  RoutesManager.get("grades", DatabaseGradeController.index);
 }
