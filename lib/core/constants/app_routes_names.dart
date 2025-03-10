@@ -19,6 +19,8 @@ class AppRoutes {
   static const String configPage = "/configPage";
   static const String subjectsPage = "/subjectsPage";
   static const String gradesPage = "/gradesPage";
+  static const String semstersPage = "/semstersPage";
+  static const String teachersPage = "/teachersPage";
 
   //
 }

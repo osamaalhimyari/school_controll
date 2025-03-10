@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:school_controll/backend/database/schemas/branch_schema.dart';
+
 import '/app/data/model/branch_model.dart';
 
 class BranchEntity {
+  static const tableName = BranchSchema.tableName;
+
   int? id;
   String? name;
   String? description;

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/app/data/model/subject_schema.dart';
-import 'package:school_controll/app/data/remote/subjects_page_data.dart';
-import 'package:school_controll/app/views/widgets/subjectsPage/adding_subject_bottom_sheet.dart';
+import 'package:school_controll/app/data/model/semester_model.dart';
+import 'package:school_controll/app/data/remote/semesters_page_data.dart';
+import 'package:school_controll/app/views/widgets/semestersPage/adding_smester_bottom_sheet.dart';
 import 'package:school_controll/core/functions/handling_transaction.dart';
 
-class SubjectsPageController extends GetxController {
+class SemestersPageController extends GetxController {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController minPointController = TextEditingController();
-  final TextEditingController maxPointController = TextEditingController();
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var isLoading = false.obs;
   //
-  RxList subjects = [].obs;
+  RxList semesters = [].obs;
   @override
   void onInit() {
     getData();
@@ -22,34 +21,34 @@ class SubjectsPageController extends GetxController {
   getData() async {
     isLoading.value = true;
 
-    var response = await SubjectsPageData.getSubjectsData();
+    var response = await SemestersPageData.getSemestersData();
     if (handlingTransaction(response)) {
-      subjects.value = response.data ?? [];
+      semesters.value = response.data ?? [];
     }
     isLoading.value = false;
   }
 
   onPressAddButton() {
-    Get.bottomSheet(AddingSubjectBottomSheet(), isScrollControlled: true);
+    Get.bottomSheet(AddingSmesterBottomSheet(), isScrollControlled: true);
   }
 
-  void saveSubject() async {
+  void saveData() async {
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
-      SubjectModel subjectData = SubjectModel(
+      SemesterModel subjectData = SemesterModel(
         name: nameController.text.trim(),
-        maxPoint: int.parse(minPointController.text),
-        minPoint: int.parse(maxPointController.text),
+        index: semesters.length - 1,
         status: true,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
 
       var response =
-          await SubjectsPageData.insertSubjectsData(subjectData.toMap());
+          await SemestersPageData.insertSemestersData(subjectData.toMap());
       if (handlingTransaction(response)) {
         if (response.data != null) {
-          subjects.add(response.data);
+          print("${response.data}");
+          semesters.add(response.data);
         }
         //
         Get.back(); // Close BottomSheet
@@ -59,8 +58,6 @@ class SubjectsPageController extends GetxController {
 
       // Clear fields after saving
       nameController.clear();
-      minPointController.clear();
-      maxPointController.clear();
       isLoading.value = false;
 
       // Close BottomSheet

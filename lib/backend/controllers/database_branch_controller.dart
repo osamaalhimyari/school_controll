@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/backend/database/db_helper.dart';
-import '/backend/database/schemas/branch_schema.dart';
 import '/backend/entities/branch_entity.dart';
-
 import '../../core/api/api_response.dart';
 
 class DatabaseBranchController {
   static DbHelper dbHelper = Get.find();
-  static String branchTableName = BranchSchema.tableName;
+  static String tableName = BranchEntity.tableName;
   //
   static index() async {
     //
@@ -19,7 +17,7 @@ class DatabaseBranchController {
     int id = 1;
     try {
       var data = await dbHelper.fetch(
-        branchTableName,
+        tableName,
         where: "branch_id=?",
         whereArgs: [id],
       );
@@ -35,7 +33,7 @@ class DatabaseBranchController {
   static Future<ApiResponse<Map<String, dynamic>>> store(
       Map<String, dynamic> data) async {
     try {
-      int res = await dbHelper.insert(branchTableName, data);
+      int res = await dbHelper.insert(tableName, data);
 
       if (res > 0) {
         var entityData = BranchEntity.fromMap(data);

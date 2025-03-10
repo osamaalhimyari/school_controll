@@ -1,8 +1,10 @@
 import 'dart:convert';
-
+import 'package:school_controll/backend/database/schemas/grade_schema.dart';
 import '/app/data/model/grade_model.dart';
 
 class GradeEntity {
+  static const tableName = GradeSchema.tableName;
+
   int? id;
   String? name;
   String? description;

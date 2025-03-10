@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import '../database/schemas/semester_schema.dart';
 import '/app/data/model/semester_model.dart';
 
 class SemesterEntity {
+  static const tableName = SemesterSchema.tableName;
+
   int? id;
   String? name;
-  bool? index;
+  int? index;
   bool? status;
   DateTime? updatedAt;
   DateTime? createdAt;
@@ -24,7 +27,7 @@ class SemesterEntity {
     return {
       'semester_id': id,
       'semester_name': name,
-      'semester_index': index == true ? 1 : 0,
+      'semester_index': index,
       'semester_status': status == true ? 1 : 0,
       'semester_updated_at': (updatedAt ?? DateTime.now()).toIso8601String(),
       'semester_created_at': (createdAt ?? DateTime.now()).toIso8601String(),
@@ -36,7 +39,7 @@ class SemesterEntity {
     return SemesterModel(
       id: map['semester_id'] as int?,
       name: map['semester_name'] as String?,
-      index: map['semester_index'] == 1 ? true : null,
+      index: map['semester_index'],
       status: map['semester_status'] == 1 ? true : null,
       updatedAt: map['semester_updated_at'] != null
           ? DateTime.parse(map['semester_updated_at'])

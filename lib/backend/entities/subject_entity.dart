@@ -1,8 +1,10 @@
 import 'dart:convert';
-
+import 'package:school_controll/backend/database/schemas/subject_schema.dart';
 import '/app/data/model/subject_schema.dart';
 
 class SubjectEntity {
+  static const tableName = SubjectSchema.tableName;
+
   int? id;
   String? name;
   bool? status;

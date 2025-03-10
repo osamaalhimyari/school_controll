@@ -52,8 +52,9 @@ class GradesPageController extends GetxController {
 
       var response = await GradesPageData.insertGradesData(gradeData.toMap());
       if (handlingTransaction(response)) {
-        if (response.data != null) {}
-        grades.add(response.data);
+        if (response.data != null) {
+          grades.add(response.data);
+        }
         clearFields();
         Get.back(); // Close BottomSheet
         isLoading.value = false;

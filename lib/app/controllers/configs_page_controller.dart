@@ -28,23 +28,43 @@ class ConfigsPageController extends GetxController {
       },
     ),
     ConfigModel(
-      key: 'year',
+      key: 'semesters',
       index: 3,
+      desc: "semesters_hint",
+      icon: Icons.horizontal_split_outlined,
+      onPressed: () {
+        //
+        Get.toNamed(AppRoutes.semstersPage);
+      },
+    ),
+    ConfigModel(
+      key: 'teachers',
+      index: 4,
+      desc: "teachers_hint",
+      icon: Icons.people_alt_outlined,
+      onPressed: () {
+        //
+        Get.toNamed(AppRoutes.teachersPage);
+      },
+    ),
+    ConfigModel(
+      key: 'branch',
+      index: 5,
+      desc: "branch_hint",
+      icon: Icons.school,
+      onPressed: () {
+        //
+      },
+    ),
+    ConfigModel(
+      key: 'year',
+      index: 5,
       desc: "year_hint",
       icon: Icons.document_scanner,
       onPressed: () {
         //
       },
     ),
-    ConfigModel(
-      key: 'semesters',
-      index: 5,
-      desc: "semesters_hint",
-      icon: Icons.corporate_fare,
-      onPressed: () {
-        //
-      },
-    )
   ];
 
   @override

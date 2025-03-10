@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:school_controll/backend/database/schemas/priviladge_schema.dart';
 
 import '/app/data/model/priviladge_model.dart';
 
 class PriviladgeEntity {
+  static const tableName = PriviladgeSchema.tableName;
+
   int? id;
   String? name;
   bool? status;

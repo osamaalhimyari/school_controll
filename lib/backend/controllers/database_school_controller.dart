@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/backend/database/db_helper.dart';
-import '/backend/database/schemas/school_schema.dart';
 import '../../core/api/api_response.dart';
-
 import '../entities/school_entity.dart';
 
 class DatabaseSchoolController {
   static DbHelper dbHelper = Get.find();
-  static String schoolTableName = SchoolSchema.tableName;
+  static String tableName = SchoolEntity.tableName;
 
   //
   static index() async {
@@ -19,7 +17,7 @@ class DatabaseSchoolController {
       Map<String, dynamic> request) async {
     try {
       final data = await dbHelper.fetch(
-        schoolTableName,
+        tableName,
       );
 
       return ApiResponse.success(data.last);
@@ -31,7 +29,7 @@ class DatabaseSchoolController {
   static Future<ApiResponse<Map<String, dynamic>>> store(
       Map<String, dynamic> data) async {
     try {
-      int res = await dbHelper.insert(schoolTableName, data);
+      int res = await dbHelper.insert(tableName, data);
 
       if (res > 0) {
         var entityData = SchoolEntity.fromMap(data);

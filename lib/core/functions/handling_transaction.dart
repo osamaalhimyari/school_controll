@@ -7,10 +7,10 @@ import '../api/api_response.dart';
 ///  هي دالة لمعالجة استجابات العمليات وتحديد حالة الطلب.
 ///
 handlingTransaction(ApiResponse response) {
-  if (!response.success) {
-    return false;
-  } else {
+  if (response.success) {
     return true;
+  } else {
+    return false;
   }
 }
 

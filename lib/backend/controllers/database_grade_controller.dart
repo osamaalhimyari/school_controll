@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/backend/database/schemas/grade_schema.dart';
 import 'package:school_controll/backend/entities/grade_entity.dart';
-
 import '/backend/database/db_helper.dart';
 import '../../core/api/api_response.dart';
 
 class DatabaseGradeController {
   static DbHelper dbHelper = Get.find();
-  static String tableName = GradeSchema.tableName;
+  static String tableName = GradeEntity.tableName;
 
   //
   static Future<ApiResponse<List<Map<String, dynamic>>?>> index(

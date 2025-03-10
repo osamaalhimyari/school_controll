@@ -1,9 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+import 'package:school_controll/backend/database/schemas/year_schema.dart';
 import '/app/data/model/year_model.dart';
 
 class YearEntity {
+  static const tableName = YearSchema.tableName;
+
   int? id;
   String name;
   bool status;

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/backend/entities/subject_entity.dart';
+import 'package:school_controll/backend/entities/semester_entity.dart';
 import '/backend/database/db_helper.dart';
 import '../../core/api/api_response.dart';
 
-class DatabaseSubjectController {
+class DatabaseSemesterController {
   static DbHelper dbHelper = Get.find();
-  static String tableName = SubjectEntity.tableName;
+  static String tableName = SemesterEntity.tableName;
 
   //
   static Future<ApiResponse<List<Map<String, dynamic>>?>> index(
@@ -18,7 +18,7 @@ class DatabaseSubjectController {
       }
       return ApiResponse.success(data);
     } catch (e) {
-      return ApiResponse.failure(message: "Failed to get subject data.");
+      return ApiResponse.failure(message: "Failed to get semester data.");
     }
   }
 
@@ -30,13 +30,13 @@ class DatabaseSubjectController {
   //   // }
   //   // try {
   //   //   final data = await dbHelper.fetch(tableName,
-  //   //       where: "subjects_id=?", whereArgs: [id], limit: 1);
+  //   //       where: "semesters_id=?", whereArgs: [id], limit: 1);
   //   //   if (data.isEmpty) {
   //   //     return ApiResponse.success(null);
   //   //   }
   //   //   return ApiResponse.success(data.first);
   //   // } catch (e) {
-  //   //   return ApiResponse.failure(message: "Failed to get subject data.");
+  //   //   return ApiResponse.failure(message: "Failed to get semester data.");
   //   // }
   // }
 
@@ -46,16 +46,16 @@ class DatabaseSubjectController {
       int res = await dbHelper.insert(tableName, data);
 
       if (res > 0) {
-        var entityData = SubjectEntity.fromMap(data);
+        var entityData = SemesterEntity.fromMap(data);
         entityData.id = res;
         return ApiResponse.success(entityData.toMap());
       } else {
-        return ApiResponse.failure(message: "Failed to insert subject data.");
+        return ApiResponse.failure(message: "Failed to insert semester data.");
       }
     } catch (e) {
-      debugPrint("Error inserting subject: $e");
+      debugPrint("Error inserting semester: $e");
       return ApiResponse.failure(
-        message: "An error occurred while inserting subject data.",
+        message: "An error occurred while inserting semester data.",
         error: e.toString(),
       );
     }

@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:school_controll/backend/database/schemas/result_schema.dart';
+
 import '/app/data/model/result_model.dart';
 
 class ResultEntity {
+  static const tableName = ResultSchema.tableName;
+
   int? id;
   int branchId;
   int studentId;

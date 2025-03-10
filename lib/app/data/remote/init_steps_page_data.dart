@@ -23,10 +23,10 @@ class InitStepsPageData {
 
   static Future<ApiResponse<Map<String, dynamic>>> insertTeacherData(
       Map<String, dynamic> data) async {
-    return await ApiTrans.post(AppApiLinks.teachers, data);
+    return await ApiTrans.post(AppApiLinks.showTeacher, data);
   }
 
   static Future<ApiResponse<Map<String, dynamic>>> getTeacherData() async {
-    return await ApiTrans.get(AppApiLinks.teachers, {});
+    return await ApiTrans.get(AppApiLinks.showTeacher, {});
   }
 }

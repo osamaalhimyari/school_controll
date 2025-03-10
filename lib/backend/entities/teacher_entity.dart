@@ -1,10 +1,12 @@
 import 'dart:convert';
-
+import 'package:school_controll/backend/database/schemas/teacher_schema.dart';
 import '/app/data/model/teacher_model.dart';
 
 class TeacherEntity {
+  static const tableName = TeacherSchema.tableName;
+
   int? id;
-  int? branchId;
+  int? type;
   String? name;
   String? description;
   bool? status;
@@ -18,7 +20,7 @@ class TeacherEntity {
 
   TeacherEntity({
     this.id,
-    this.branchId,
+    this.type,
     this.name,
     this.description,
     this.status,
@@ -35,7 +37,7 @@ class TeacherEntity {
   Map<String, dynamic> toMap() {
     return {
       'teacher_id': id,
-      'teacher_branch_id': branchId,
+      'teacher_type': type,
       'teacher_name': name,
       'teacher_description': description,
       'teacher_status': status != null ? (status! ? 1 : 0) : null,
@@ -53,7 +55,7 @@ class TeacherEntity {
   factory TeacherEntity.fromMap(Map<String, dynamic> map) {
     return TeacherModel(
       id: map['teacher_id'],
-      branchId: map['teacher_branch_id'],
+      type: map['teacher_type'],
       name: map['teacher_name'],
       description: map['teacher_description'],
       status: map['teacher_status'] == 1

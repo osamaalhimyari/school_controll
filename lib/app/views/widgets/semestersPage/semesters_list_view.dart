@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/app/controllers/subjects_page_controller.dart';
-import 'package:school_controll/app/data/model/subject_schema.dart';
+import 'package:school_controll/app/controllers/semesters_page_controller.dart';
+import 'package:school_controll/app/data/model/semester_model.dart';
 import 'package:school_controll/core/functions/format_date.dart';
 
-class SubjectsListView extends GetView<SubjectsPageController> {
-  const SubjectsListView({super.key});
+class SemestersListView extends GetView<SemestersPageController> {
+  const SemestersListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +15,16 @@ class SubjectsListView extends GetView<SubjectsPageController> {
           child: CircularProgressIndicator(),
         );
       }
-      if (controller.subjects.isEmpty) {
-        return const Center(child: Text("No subject added yet"));
+      if (controller.semesters.isEmpty) {
+        return const Center(child: Text("No semester added yet"));
       }
+
       return ListView.builder(
-        itemCount: controller.subjects.length,
+        itemCount: controller.semesters.length,
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemBuilder: (context, index) {
-          final SubjectModel subject =
-              SubjectModel.fromMap(controller.subjects[index]);
+          final SemesterModel semester =
+              SemesterModel.fromMap(controller.semesters[index]);
 
           return Card(
             elevation: 2,
@@ -34,17 +35,17 @@ class SubjectsListView extends GetView<SubjectsPageController> {
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               leading: const Icon(
-                Icons.book_outlined,
+                Icons.horizontal_split_outlined,
                 size: 30,
               ),
               title: Text(
-                subject.name ?? "",
+                "${semester.name}",
                 style: Get.textTheme.displaySmall
                     ?.copyWith(fontWeight: FontWeight.w600),
               ),
               subtitle: Center(
                 child: Text(
-                  "${formatDate("Created", subject.createdAt)}  •  ${formatDate("Updated", subject.updatedAt)}",
+                  "${formatDate("Created", semester.createdAt)}  •  ${formatDate("Updated", semester.updatedAt)}",
                   style: Get.textTheme.bodyMedium
                       ?.copyWith(color: Colors.grey[600]),
                 ),
@@ -52,7 +53,7 @@ class SubjectsListView extends GetView<SubjectsPageController> {
               trailing: const Icon(Icons.arrow_forward_ios,
                   size: 16, color: Colors.grey),
               onTap: () {
-                // Handle subject tap (e.g., navigate to details page)
+                // Handle semester tap (e.g., navigate to details page)
               },
             ),
           );

@@ -23,7 +23,8 @@ class RoutesManager {
   }
 
   // Resolve a request
-  static Future handleRequest(String method, String path, dynamic data) async {
+  static Future<ApiResponse> handleRequest(
+      String method, String path, dynamic data) async {
     final route = _routes.firstWhere(
       (r) => r.method == method && r.path == path,
       orElse: () => _Route(
@@ -38,7 +39,7 @@ class RoutesManager {
   }
 
   // Apply middlewares in order before calling the handler
-  static Future _applyMiddleware(
+  static Future<ApiResponse> _applyMiddleware(
       List middlewares, dynamic handler, data) async {
     if (middlewares.isEmpty) {
       return handler(data);

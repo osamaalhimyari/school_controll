@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:school_controll/backend/database/schemas/estimate_schema.dart';
+
 import '/app/data/model/estimate_model.dart';
 
 class EstimateEntity {
+  static const tableName = EstimateSchema.tableName;
+
   int? id;
   String? name;
   int? fromValue;

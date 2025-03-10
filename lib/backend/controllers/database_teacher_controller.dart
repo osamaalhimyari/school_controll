@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/backend/database/schemas/teacher_schema.dart';
 import 'package:school_controll/backend/entities/teacher_entity.dart';
 import '/backend/database/db_helper.dart';
 import '../../core/api/api_response.dart';
 
 class DatabaseTeacherController {
   static DbHelper dbHelper = Get.find();
-  static String teacherTableName = TeacherSchema.tableName;
+  static String tableName = TeacherEntity.tableName;
 
   //
-  static index() async {
-    //
+  static index(Map<String, dynamic> request) async {
+    try {
+      final data = await dbHelper.fetch(tableName);
+      if (data.isEmpty) {
+        return ApiResponse.success(null);
+      }
+      return ApiResponse.success(data);
+    } catch (e) {
+      return ApiResponse.failure(message: "Failed to get semester data.");
+    }
   }
 
+////////////////////
   static Future<ApiResponse<Map<String, dynamic>>> show(
       Map<String, dynamic> request) async {
     int? id = request['id'];
@@ -21,7 +29,7 @@ class DatabaseTeacherController {
       return ApiResponse.failure(message: "id is requierd");
     }
     try {
-      final data = await dbHelper.fetch(teacherTableName,
+      final data = await dbHelper.fetch(tableName,
           where: "teacher_id=?", whereArgs: [id], limit: 1);
       if (data.isEmpty) {
         return ApiResponse.success(null);
@@ -31,11 +39,12 @@ class DatabaseTeacherController {
       return ApiResponse.failure(message: "Failed to get teacher data.");
     }
   }
+////////////////////
 
   static Future<ApiResponse<Map<String, dynamic>>> store(
       Map<String, dynamic> data) async {
     try {
-      int res = await dbHelper.insert(teacherTableName, data);
+      int res = await dbHelper.insert(tableName, data);
 
       if (res > 0) {
         var entityData = TeacherEntity.fromMap(data);

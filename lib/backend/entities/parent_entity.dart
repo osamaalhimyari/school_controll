@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:school_controll/backend/database/schemas/parent_schema.dart';
 
 import '/app/data/model/parent_model.dart';
 
 class ParentEntity {
+  static const tableName = ParentSchema.tableName;
+
   int? id;
   int? branchId;
   String? imageUri;

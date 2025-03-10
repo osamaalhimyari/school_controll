@@ -27,11 +27,11 @@ class TeacherForm extends GetView<TeacherFormController> {
               decoration: InputDecoration(labelText: 'Phone Number'),
               keyboardType: TextInputType.phone,
             ),
-            SizedBox(height: 16),
-            TextField(
-              controller: controller.birthPlaceController,
-              decoration: InputDecoration(labelText: 'Birth Place'),
-            ),
+            // SizedBox(height: 16),
+            // TextField(
+            //   controller: controller.birthPlaceController,
+            //   decoration: InputDecoration(labelText: 'Birth Place'),
+            // ),
             SizedBox(height: 16),
             TextField(
               controller: controller.addressController,

@@ -3,7 +3,7 @@ import '/backend/entities/teacher_entity.dart';
 class TeacherModel extends TeacherEntity {
   TeacherModel({
     super.id,
-    super.branchId,
+    super.type,
     super.name,
     super.description,
     super.status,
