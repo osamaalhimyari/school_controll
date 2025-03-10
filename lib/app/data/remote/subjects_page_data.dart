@@ -1,4 +1,4 @@
-import 'package:school_controll/core/constants/app_api_links.dart';
+import 'package:school_controll/core/api/app_api_links.dart';
 
 import '../../../core/api/api_response.dart';
 import '../../../core/api/api_trans.dart';

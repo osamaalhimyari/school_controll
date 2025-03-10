@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:school_controll/app/data/model/subject_schema.dart';
 import 'package:school_controll/app/data/remote/subjects_page_data.dart';
 import 'package:school_controll/app/views/widgets/subjectsPage/adding_subject_bottom_sheet.dart';
-import 'package:school_controll/core/functions/handling_transaction.dart';
 
 class SubjectsPageController extends GetxController {
   final TextEditingController nameController = TextEditingController();
@@ -13,17 +12,29 @@ class SubjectsPageController extends GetxController {
   var isLoading = false.obs;
   //
   RxList subjects = [].obs;
+  var icon = Icons.abc;
   @override
   void onInit() {
+    icon = Get.arguments['icon'] ?? Icons.abc;
     getData();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    // Dispose of controllers to avoid memory leaks
+    nameController.dispose();
+    minPointController.dispose();
+    maxPointController.dispose();
+
+    super.onClose();
   }
 
   getData() async {
     isLoading.value = true;
 
     var response = await SubjectsPageData.getSubjectsData();
-    if (handlingTransaction(response)) {
+    if (response.success) {
       subjects.value = response.data ?? [];
     }
     isLoading.value = false;
@@ -47,14 +58,14 @@ class SubjectsPageController extends GetxController {
 
       var response =
           await SubjectsPageData.insertSubjectsData(subjectData.toMap());
-      if (handlingTransaction(response)) {
+      if (response.success) {
         if (response.data != null) {
           subjects.add(response.data);
         }
         //
         Get.back(); // Close BottomSheet
       } else {
-        //
+        Get.snackbar('Error', '${response.error}', backgroundColor: Colors.red);
       }
 
       // Clear fields after saving

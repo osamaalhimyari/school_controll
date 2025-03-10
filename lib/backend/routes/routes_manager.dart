@@ -40,7 +40,7 @@ class RoutesManager {
 
   // Apply middlewares in order before calling the handler
   static Future<ApiResponse> _applyMiddleware(
-      List middlewares, dynamic handler, data) async {
+      List middlewares, handler, data) async {
     if (middlewares.isEmpty) {
       return handler(data);
     }

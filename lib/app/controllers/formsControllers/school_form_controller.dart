@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_controll/app/data/model/school_model.dart';
 import 'package:school_controll/app/data/remote/init_steps_page_data.dart';
-import 'package:school_controll/core/functions/handling_transaction.dart';
+import 'package:school_controll/core/services/services.dart';
 
 class SchoolFormController extends GetxController {
   // var steperController = Get.find<SteperController>();
@@ -39,10 +41,12 @@ class SchoolFormController extends GetxController {
     super.onClose();
   }
 
+  MyServices myServices = Get.find();
+
   Future<void> getData() async {
     var response = await InitStepsPageData.getSchoolData();
 
-    if (handlingTransaction(response) && response.data != null) {
+    if (response.success && response.data != null) {
       debugPrint("${response.data}");
       var data = SchoolModel.fromMap(response.data ?? {});
       schoolNameController.text = data.name ?? "";
@@ -54,6 +58,9 @@ class SchoolFormController extends GetxController {
       schoolStatus.value = data.status ?? false;
 
       status.value = true;
+
+      myServices.sharedPreferences
+          .setString("school", jsonEncode(data.toMap()));
     }
   }
 
@@ -73,7 +80,7 @@ class SchoolFormController extends GetxController {
     );
 
     var response = await InitStepsPageData.insertSchoolData(schoolData.toMap());
-    if (handlingTransaction(response)) {
+    if (response.success) {
       status.value = true;
       Get.snackbar('Success', 'School added successfully!',
           backgroundColor: Colors.green);

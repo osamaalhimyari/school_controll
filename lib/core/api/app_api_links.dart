@@ -14,6 +14,6 @@ class AppApiLinks {
   static const String subjects = "subjects";
   static const String grades = "grades";
   static const String semesters = "semesters";
-  static const String showTeacher = "showTeacher";
+  // static const String showTeacher = "teacher.show";
   static const String teachers = "teachers";
 }

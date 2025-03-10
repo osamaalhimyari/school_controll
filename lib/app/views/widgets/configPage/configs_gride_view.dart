@@ -11,6 +11,8 @@ class ConfigsGridView extends GetView<ConfigsPageController> {
       padding: const EdgeInsets.all(12.0),
       child: GridView.builder(
         itemCount: controller.configs.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 12,

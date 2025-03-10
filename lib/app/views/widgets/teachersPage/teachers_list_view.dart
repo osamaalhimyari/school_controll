@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_controll/app/controllers/teachers_page_controller.dart';
-import 'package:school_controll/app/data/model/semester_model.dart';
+import 'package:school_controll/app/data/model/teacher_model.dart';
 import 'package:school_controll/core/functions/format_date.dart';
 
 class TeachersListView extends GetView<TeachersPageController> {
@@ -23,31 +23,30 @@ class TeachersListView extends GetView<TeachersPageController> {
         itemCount: controller.teachers.length,
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemBuilder: (context, index) {
-          final SemesterModel semester =
-              SemesterModel.fromMap(controller.teachers[index]);
+          final TeacherModel semester =
+              TeacherModel.fromMap(controller.teachers[index]);
 
           return Card(
             elevation: 2,
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: const Icon(
-                Icons.horizontal_split_outlined,
+              leading: Icon(
+                controller.icon,
                 size: 30,
               ),
               title: Text(
                 "${semester.name}",
-                style: Get.textTheme.displaySmall
+                style: Get.textTheme.titleLarge
                     ?.copyWith(fontWeight: FontWeight.w600),
               ),
               subtitle: Center(
                 child: Text(
                   "${formatDate("Created", semester.createdAt)}  •  ${formatDate("Updated", semester.updatedAt)}",
-                  style: Get.textTheme.bodyMedium
-                      ?.copyWith(color: Colors.grey[600]),
+                  style: Get.textTheme.bodyMedium,
                 ),
               ),
               trailing: const Icon(Icons.arrow_forward_ios,

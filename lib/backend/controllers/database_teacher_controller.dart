@@ -9,36 +9,46 @@ class DatabaseTeacherController {
   static String tableName = TeacherEntity.tableName;
 
   //
-  static index(Map<String, dynamic> request) async {
+  static Future<ApiResponse<dynamic>> index(
+      Map<String, dynamic> request) async {
+    int? id = request['id'];
     try {
+      if (id != null) {
+        final data = await dbHelper.fetch(tableName,
+            where: "teacher_id=?", whereArgs: [id], limit: 1);
+        if (data.isEmpty) {
+          return ApiResponse.success(null);
+        }
+        return ApiResponse.success(data.first);
+      }
+
+      //
       final data = await dbHelper.fetch(tableName);
       if (data.isEmpty) {
         return ApiResponse.success(null);
       }
       return ApiResponse.success(data);
     } catch (e) {
-      return ApiResponse.failure(message: "Failed to get semester data.");
+      return ApiResponse.failure(message: "Failed to get semester data .. $e");
     }
   }
 
 ////////////////////
-  static Future<ApiResponse<Map<String, dynamic>>> show(
-      Map<String, dynamic> request) async {
-    int? id = request['id'];
-    if (id == null) {
-      return ApiResponse.failure(message: "id is requierd");
-    }
-    try {
-      final data = await dbHelper.fetch(tableName,
-          where: "teacher_id=?", whereArgs: [id], limit: 1);
-      if (data.isEmpty) {
-        return ApiResponse.success(null);
-      }
-      return ApiResponse.success(data.first);
-    } catch (e) {
-      return ApiResponse.failure(message: "Failed to get teacher data.");
-    }
-  }
+  // static Future<ApiResponse<Map<String, dynamic>>> show(
+  //     Map<String, dynamic> request) async {
+  //   int id = request['id'];
+
+  //   try {
+  //     final data = await dbHelper.fetch(tableName,
+  //         where: "teacher_id=?", whereArgs: [id], limit: 1);
+  //     if (data.isEmpty) {
+  //       return ApiResponse.success(null);
+  //     }
+  //     return ApiResponse.success(data.first);
+  //   } catch (e) {
+  //     return ApiResponse.failure(message: "Failed to get teacher data.");
+  //   }
+  // }
 ////////////////////
 
   static Future<ApiResponse<Map<String, dynamic>>> store(

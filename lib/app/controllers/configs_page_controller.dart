@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_controll/app/data/model/school_model.dart';
 import 'package:school_controll/core/constants/app_routes_names.dart';
+import 'package:school_controll/core/services/services.dart';
 
 class ConfigsPageController extends GetxController {
   //
   List<ConfigModel> configs = [];
-
+  SchoolModel school = SchoolModel();
   final List<ConfigModel> _confData = [
     ConfigModel(
       key: 'subjects',
@@ -14,17 +18,19 @@ class ConfigsPageController extends GetxController {
       icon: Icons.book_outlined,
       onPressed: () {
 //
-        Get.toNamed(AppRoutes.subjectsPage);
+        Get.toNamed(AppRoutes.subjectsPage,
+            arguments: {"icon": Icons.book_outlined});
       },
     ),
     ConfigModel(
       key: 'grades',
       index: 2,
       desc: "grades_hint",
-      icon: Icons.business,
+      icon: Icons.window_outlined,
       onPressed: () {
         //
-        Get.toNamed(AppRoutes.gradesPage);
+        Get.toNamed(AppRoutes.gradesPage,
+            arguments: {"icon": Icons.window_outlined});
       },
     ),
     ConfigModel(
@@ -34,7 +40,8 @@ class ConfigsPageController extends GetxController {
       icon: Icons.horizontal_split_outlined,
       onPressed: () {
         //
-        Get.toNamed(AppRoutes.semstersPage);
+        Get.toNamed(AppRoutes.semstersPage,
+            arguments: {"icon": Icons.horizontal_split_outlined});
       },
     ),
     ConfigModel(
@@ -44,22 +51,25 @@ class ConfigsPageController extends GetxController {
       icon: Icons.people_alt_outlined,
       onPressed: () {
         //
-        Get.toNamed(AppRoutes.teachersPage);
+        Get.toNamed(AppRoutes.teachersPage,
+            arguments: {"icon": Icons.people_alt_outlined});
       },
     ),
     ConfigModel(
-      key: 'branch',
+      key: 'branches',
       index: 5,
-      desc: "branch_hint",
-      icon: Icons.school,
+      desc: "branches_hint",
+      icon: Icons.business_outlined,
       onPressed: () {
         //
+        Get.toNamed(AppRoutes.branchesPage,
+            arguments: {"icon": Icons.business_outlined});
       },
     ),
     ConfigModel(
-      key: 'year',
+      key: 'years',
       index: 5,
-      desc: "year_hint",
+      desc: "years_hint",
       icon: Icons.document_scanner,
       onPressed: () {
         //
@@ -67,9 +77,14 @@ class ConfigsPageController extends GetxController {
     ),
   ];
 
+  MyServices myServices = Get.find();
   @override
   void onInit() {
     configs = _confData;
+    var schoolString = myServices.sharedPreferences.getString("school");
+    if (schoolString != null) {
+      school = SchoolModel.fromMap(jsonDecode(schoolString));
+    }
     super.onInit();
   }
 

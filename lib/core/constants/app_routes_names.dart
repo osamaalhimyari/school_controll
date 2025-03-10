@@ -21,6 +21,7 @@ class AppRoutes {
   static const String gradesPage = "/gradesPage";
   static const String semstersPage = "/semstersPage";
   static const String teachersPage = "/teachersPage";
+  static const String branchesPage = "/branchesPage";
 
   //
 }

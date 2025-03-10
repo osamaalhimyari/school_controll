@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:school_controll/app/views/screens/branches_page.dart';
 import 'package:school_controll/app/views/screens/configs_page.dart';
 import 'package:school_controll/app/views/screens/grades_page.dart';
 import 'package:school_controll/app/views/screens/semesters_page.dart';
@@ -25,4 +26,5 @@ List<GetPage<dynamic>>? routesPages = [
   GetPage(name: AppRoutes.gradesPage, page: () => const GradesPage()),
   GetPage(name: AppRoutes.semstersPage, page: () => const SemestersPage()),
   GetPage(name: AppRoutes.teachersPage, page: () => const TeachersPage()),
+  GetPage(name: AppRoutes.branchesPage, page: () => const BranchesPage()),
 ];

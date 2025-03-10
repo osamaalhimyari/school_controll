@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_controll/app/data/model/teacher_model.dart';
@@ -22,6 +23,15 @@ class TeachersPageController extends GetxController {
   ///
   RxList teachers = [].obs;
   RxBool isLoading = false.obs;
+  var icon = Icons.abc;
+  @override
+  void onInit() {
+    icon = Get.arguments == null
+        ? Icons.abc
+        : (Get.arguments['icon'] ?? Icons.abc);
+    getData();
+    super.onInit();
+  }
 
   @override
   void onClose() {
@@ -40,20 +50,21 @@ class TeachersPageController extends GetxController {
     var response = await TeachersPageData.getTeachersData();
 
     if (response.success && response.data != null) {
-      // debugPrint("${response.data}");
-      //   var data = TeacherModel.fromMap(response.data ?? {});
-      //   nameController.text = data.name ?? "";
-      //   descriptionController.text = data.description ?? "";
-      //   phoneNumberController.text = data.phoneNumber ?? "";
-      //   birthPlaceController.text = data.birthPlace ?? "";
-      //   addressController.text = data.address ?? "";
-      //   birthDate.value = data.birthDate;
-      //   gender.value = data.gender ?? true;
-      //   teacherStatus.value = data.status ?? false;
-      //   status.value = true;
       teachers.value = (response.data);
     }
     isLoading.value = false;
+  }
+
+  Future<void> fillFields(TeacherModel data) async {
+    nameController.text = data.name ?? "";
+    descriptionController.text = data.description ?? "";
+    phoneNumberController.text = data.phoneNumber ?? "";
+    birthPlaceController.text = data.birthPlace ?? "";
+    addressController.text = data.address ?? "";
+    birthDate.value = data.birthDate;
+    gender.value = data.gender ?? true;
+    teacherStatus.value = data.status ?? false;
+    status.value = true;
   }
 
   Future<void> pickBirthDate(BuildContext context) async {
@@ -89,18 +100,18 @@ class TeachersPageController extends GetxController {
           await TeachersPageData.insertTeachersData(newTeacher.toMap());
 
       if (response.success && response.data != null) {
-        status.value = true;
         // Get.snackbar('Success', 'Teacher added successfully!',
         //     backgroundColor: Colors.green);
+        status.value = true;
         teachers.add(response.data);
+        isLoading.value = false;
         Get.back(); // Close form after saving
       } else {
         status.value = false;
 
-        Get.snackbar('Error', 'Failed to add teacher',
-            backgroundColor: Colors.red);
+        Get.snackbar('Error', '${response.error}', backgroundColor: Colors.red);
       }
-      isLoading.value = true;
+      isLoading.value = false;
     }
   }
 

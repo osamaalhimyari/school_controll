@@ -12,12 +12,11 @@ void defineRoutes() {
   RoutesManager.get("schools", DatabaseSchoolController.show);
   RoutesManager.post("schools", DatabaseSchoolController.store);
 //
-  RoutesManager.get("branches", DatabaseBranchController.show);
+  RoutesManager.get("branches", DatabaseBranchController.index);
   RoutesManager.post("branches", DatabaseBranchController.store);
   //
   RoutesManager.post("teachers", DatabaseTeacherController.store);
   RoutesManager.get("teachers", DatabaseTeacherController.index);
-  RoutesManager.get("showTeacher", DatabaseTeacherController.show);
   //
   RoutesManager.post("subjects", DatabaseSubjectController.store);
   RoutesManager.get("subjects", DatabaseSubjectController.index);

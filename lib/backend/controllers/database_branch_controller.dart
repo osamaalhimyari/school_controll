@@ -8,25 +8,27 @@ class DatabaseBranchController {
   static DbHelper dbHelper = Get.find();
   static String tableName = BranchEntity.tableName;
   //
-  static index() async {
-    //
-  }
-
-  static Future<ApiResponse<Map<String, dynamic>>> show(
+  static Future<ApiResponse<dynamic>> index(
       Map<String, dynamic> request) async {
-    int id = 1;
+    int? id = request['id'];
     try {
-      var data = await dbHelper.fetch(
-        tableName,
-        where: "branch_id=?",
-        whereArgs: [id],
-      );
+      if (id != null) {
+        final data = await dbHelper.fetch(tableName,
+            where: "branch_id=?", whereArgs: [id], limit: 1);
+        if (data.isEmpty) {
+          return ApiResponse.success(null);
+        }
+        return ApiResponse.success(data.first);
+      }
+
+      //
+      final data = await dbHelper.fetch(tableName);
       if (data.isEmpty) {
         return ApiResponse.success(null);
       }
-      return ApiResponse.success(data.first);
+      return ApiResponse.success(data);
     } catch (e) {
-      return ApiResponse.failure(message: "Failed to get branch data.");
+      return ApiResponse.failure(message: "Failed to get branches data .. $e");
     }
   }
 

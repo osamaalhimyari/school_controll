@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_controll/app/controllers/formsControllers/branch_form_controller.dart';
+import 'package:school_controll/app/controllers/branches_page_controller.dart';
 
-class BranchForm extends GetView<BranchFormController> {
+class BranchForm extends GetView<BranchesPageController> {
   const BranchForm({super.key});
   @override
   Widget build(BuildContext context) {
@@ -12,32 +12,32 @@ class BranchForm extends GetView<BranchFormController> {
         child: Column(
           children: [
             TextField(
-              controller: controller.branchNameController,
+              controller: controller.nameController,
               decoration: InputDecoration(labelText: 'Branch Name'),
             ),
             SizedBox(height: 16),
             TextField(
-              controller: controller.branchDescriptionController,
+              controller: controller.descriptionController,
               decoration: InputDecoration(labelText: 'Description'),
             ),
             SizedBox(height: 16),
             TextField(
-              controller: controller.branchImageUriController,
+              controller: controller.imageUriController,
               decoration: InputDecoration(labelText: 'Image URI'),
             ),
             SizedBox(height: 16),
             TextField(
-              controller: controller.branchCityController,
+              controller: controller.cityController,
               decoration: InputDecoration(labelText: 'City'),
             ),
             SizedBox(height: 16),
             TextField(
-              controller: controller.branchAddressController,
+              controller: controller.addressController,
               decoration: InputDecoration(labelText: 'Address'),
             ),
             SizedBox(height: 16),
             TextField(
-              controller: controller.branchPhoneNumberController,
+              controller: controller.phoneNumberController,
               decoration: InputDecoration(labelText: 'Phone Number'),
             ),
             SizedBox(height: 16),
@@ -51,7 +51,7 @@ class BranchForm extends GetView<BranchFormController> {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                await controller.insertBranch();
+                await controller.saveData();
               },
               child: Text('Save Branch'),
             ),

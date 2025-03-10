@@ -5,6 +5,7 @@ class StudentSchema {
     return '''
       CREATE TABLE IF NOT EXISTS $tableName (
         student_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        student_academec_key INTEGER,
         student_branch_id INTEGER,
         student_parent_id INTEGER,
         student_relation_name TEXT,

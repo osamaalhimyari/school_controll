@@ -26,22 +26,24 @@ class GradesListView extends GetView<GradesPageController> {
 
           return Card(
             elevation: 2,
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: const Icon(Icons.business, size: 30),
+              leading: Icon(
+                controller.icon,
+                size: 30,
+              ),
               title: Text(
                 grade.name ?? "",
-                style: Get.textTheme.displaySmall
+                style: Get.textTheme.titleLarge
                     ?.copyWith(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
                 "Stage: ${grade.stage} • Capacity: ${grade.capacity}",
-                style:
-                    Get.textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                style: Get.textTheme.bodyMedium,
               ),
               trailing: IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),

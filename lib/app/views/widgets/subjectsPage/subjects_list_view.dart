@@ -27,26 +27,25 @@ class SubjectsListView extends GetView<SubjectsPageController> {
 
           return Card(
             elevation: 2,
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: const Icon(
-                Icons.book_outlined,
+              leading: Icon(
+                controller.icon,
                 size: 30,
               ),
               title: Text(
                 subject.name ?? "",
-                style: Get.textTheme.displaySmall
+                style: Get.textTheme.titleLarge
                     ?.copyWith(fontWeight: FontWeight.w600),
               ),
               subtitle: Center(
                 child: Text(
                   "${formatDate("Created", subject.createdAt)}  •  ${formatDate("Updated", subject.updatedAt)}",
-                  style: Get.textTheme.bodyMedium
-                      ?.copyWith(color: Colors.grey[600]),
+                  style: Get.textTheme.bodyMedium,
                 ),
               ),
               trailing: const Icon(Icons.arrow_forward_ios,

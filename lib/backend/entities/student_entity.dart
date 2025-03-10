@@ -10,6 +10,7 @@ class StudentEntity {
   int? id;
   int branchId;
   int parentId;
+  // int academecey; student_academec_key
   String relationName;
   String branchImageUri;
   String name;

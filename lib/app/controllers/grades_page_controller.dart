@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:school_controll/app/data/model/grade_model.dart';
 import 'package:school_controll/app/data/remote/grades_page_data.dart';
 import 'package:school_controll/app/views/widgets/gradesPage/adding_grades_bottom_sheet.dart';
-import 'package:school_controll/core/functions/handling_transaction.dart';
 
 class GradesPageController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -16,17 +15,29 @@ class GradesPageController extends GetxController {
   var isLoading = false.obs;
   //
   RxList grades = [].obs;
+  var icon = Icons.abc;
   @override
   void onInit() {
+    icon = Get.arguments['icon'] ?? Icons.abc;
     getData();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    // Dispose of controllers to avoid memory leaks
+    nameController.dispose();
+    descriptionController.dispose();
+    stageController.dispose();
+    capacityController.dispose();
+    super.onClose();
   }
 
   getData() async {
     isLoading.value = true;
 
     var response = await GradesPageData.getGradesData();
-    if (handlingTransaction(response)) {
+    if (response.success) {
       grades.value = response.data ?? [];
     }
     isLoading.value = false;
@@ -51,7 +62,7 @@ class GradesPageController extends GetxController {
       );
 
       var response = await GradesPageData.insertGradesData(gradeData.toMap());
-      if (handlingTransaction(response)) {
+      if (response.success) {
         if (response.data != null) {
           grades.add(response.data);
         }
