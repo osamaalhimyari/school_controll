@@ -1,7 +1,7 @@
 # school_controll
 
 A new Flutter project.
-
+this is a project for scool controll
 ## Getting Started
 
 This project is a starting point for a Flutter application.
